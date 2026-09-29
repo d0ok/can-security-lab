@@ -25,16 +25,19 @@ vehicle or hardware required — and shows what basic detective controls
 can and can't catch.
 
 ## Repo structure
+
+​```text
 can-security-lab/
 ├── scripts/
-│ ├── common/ # baseline traffic generator, log parser, lab startup helper
-│ ├── attacks/ # replay, injection, DoS attack + impact-analysis scripts
-│ └── detection/ # one detector per attack
+│   ├── common/        # baseline traffic generator, log parser, lab startup helper
+│   ├── attacks/        # replay, injection, DoS attack + impact-analysis scripts
+│   └── detection/       # one detector per attack
 ├── docs/
-│ ├── tara/ # ISO/SAE 21434-style TARA (scope, threats, risk matrix)
-│ └── plots/ # generated summary charts
-├── logs/ # sample captures from each attack
+│   ├── tara/            # ISO/SAE 21434-style TARA (scope, threats, risk matrix)
+│   └── plots/            # generated summary charts
+├── logs/                # sample captures from each attack
 └── requirements.txt
+​```
 
 ## Setup
 
