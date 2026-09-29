@@ -25,8 +25,7 @@ vehicle or hardware required — and shows what basic detective controls
 can and can't catch.
 
 ## Repo structure
-
-​```text
+```text
 can-security-lab/
 ├── scripts/
 │   ├── common/        # baseline traffic generator, log parser, lab startup helper
@@ -37,8 +36,7 @@ can-security-lab/
 │   └── plots/            # generated summary charts
 ├── logs/                # sample captures from each attack
 └── requirements.txt
-​```
-
+```
 ## Setup
 
 ```bash
