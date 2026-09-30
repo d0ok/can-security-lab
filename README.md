@@ -203,6 +203,23 @@ TARA doc 03 for the full list and reasoning.
   simulated — this lab demonstrates the *absence* of those controls,
   not an implementation of them.
 
+ ## Disclaimer
+
+This project is for **educational and research purposes only**, built
+and tested entirely on a virtual CAN interface (`vcan0`) with no
+connection to any real vehicle, ECU, or hardware. It is intended to
+demonstrate CAN bus security concepts in a safe, isolated environment.
+
+Do not use these scripts against any CAN bus, vehicle, or system you do
+not own or do not have explicit written authorization to test. Running
+these attacks (particularly the DoS flood or injection scripts) against
+a real vehicle could cause malfunction, safety hazards, or damage, and
+may be illegal depending on your jurisdiction.
+
+The author provides this software "as is", for learning purposes, and
+accepts no responsibility for misuse or any damage resulting from its
+use. See [LICENSE](LICENSE) for full terms.
+
 ## License
 
 MIT
