@@ -69,8 +69,7 @@ finding) a sufficiently intense flood could itself prevent a live/online
 version of these detectors from seeing all the traffic they're supposed
 to analyze. This is disclosed explicitly rather than glossed over.
 
-### Recommended but not implemented (preventive — require real
-hardware/architecture beyond this lab's scope)
+### Recommended but not implemented (preventive — require real hardware/architecture beyond this lab's scope)
 
 | Threat(s) | Countermeasure | Why it's out of scope here |
 |-----------|-------------------|-------------------------------|
